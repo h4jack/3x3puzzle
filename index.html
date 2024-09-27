@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3x3 Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./favicon.svg">
+</head>
+
+<body>
+    <nav class="menu">
+        <div class="profile">
+            <div class="player-image"></div>
+            <div class="player-name-box">
+                <div class="player-name">Guest</div>
+                <div class="balance-box">
+                    <div class="player-balance">₹10000 </div>
+                    <div class="add-balance">
+                        <span class="line hline"></span>
+                        <span class="line vline"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="menubtn">
+            <span class="menubar"></span>
+            <span class="menubar"></span>
+            <span class="menubar"></span>
+        </div>
+    </nav>
+
+    <div style="display: none;" id="custom-style"></div>
+
+    <div class="game-body">
+        <div class="game-stat">
+            <div class="game-score">
+                <h3>Game Status</h3>
+                <table>
+                    <tr>
+                        <td>Current Click</td>
+                        <td>: <span class="click">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Lowest Click</td>
+                        <td>: <span class="lowest-click">0</span></td>
+                    </tr>
+                    <tr>
+                        <td>Highest Click</td>
+                        <td>: <span class="highest-click">0</span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="custom-image">
+                <label>
+                    <p>[Note] Make sure the image dimension x should be equals to y. i mean make sure the image is
+                        square
+                        size.</p>
+                    <input type="text" class="custom-image-url" placeholder="Enter Custom Image URL">
+                </label>
+                <div class="file-upload-div">
+                    <label class="file-upload">
+                        <input type="file" id="image-file" />
+                        <span>Select a file</span>
+                    </label>
+                    <span id="file-status">Not Selected</span>
+                </div>
+            </div>
+            <div class="startNew">Start New</div>
+        </div>
+        <div>
+            <h2>Image Puzzle 3x3</h2>
+            <div class="box">
+                <div class="row">
+                    <div index="1" class="col col-1">
+                        <p>1</p>
+                    </div>
+                    <div index="2" class="col col-2">
+                        <p>2</p>
+                    </div>
+                    <div index="3" class="col col-3">
+                        <p>3</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div index="4" class="col col-4">
+                        <p>4</p>
+                    </div>
+                    <div index="5" class="col col-5">
+                        <p>5</p>
+                    </div>
+                    <div index="6" class="col col-6">
+                        <p>6</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div index="7" class="col col-7">
+                        <p>7</p>
+                    </div>
+                    <div index="8" class="col col-8">
+                        <p>8</p>
+                    </div>
+                    <div index="9" class="col col-9-closed">
+                    </div>
+                </div>
+                <div class="game-over">
+                    <h3>Game Over</h3>
+                    <p>[Game Over] Start a new game, you have completed the game in <span
+                            class="current-click-over"></span> Click.</p>
+                    <div class="startNew">Start New</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">©️2024 <a href="https://susanta.rf.gd">susanta.rf.gd</a></footer>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const startNew = document.querySelectorAll(".startNew");
+            const imageFileInput = document.getElementById("image-file");
+            const fileStatus = document.getElementById("file-status");
+            const customImageInput = document.querySelector(".custom-image-url");
+            const style = document.getElementById("custom-style");
+
+            // Update file status when a file is selected
+            imageFileInput.addEventListener('change', () => {
+                fileStatus.innerText = imageFileInput.files.length > 0 ? "Image Selected" : "Not Selected";
+            });
+
+            // Start a new game
+            startNew.forEach(newStart => {
+                newStart.onclick = () => {
+                    score[0] = 0; // Reset the current score
+                    setPuzzleImage();
+                    resetGame();
+                    shufflePuzzle(); // Shuffle the puzzle
+                };
+            });
+
+            // Shuffle the puzzle on page load
+            shufflePuzzle();
+            document.querySelectorAll(".col").forEach(col => {
+                col.onclick = () => handleColClick(col);
+            });
+
+            setScores();
+
+            function setPuzzleImage() {
+                if (imageFileInput.files.length > 0) {
+                    const file = imageFileInput.files[0];
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        style.innerHTML = `
+                    <style>
+                        .col {
+                            background-image: url("${event.target.result}");
+                        }
+                        .col-9-closed {
+                            background-image: none;
+                        }
+                    </style>
+                `;
+                    };
+                    reader.readAsDataURL(file);
+                } else if (isValidURL(customImageInput.value)) {
+                    style.innerHTML = `
+                <style>
+                    .col {
+                        background-image: url("${customImageInput.value}");
+                    }
+                    .col-9-closed {
+                        background-image: none;
+                    }
+                </style>
+            `;
+                } else {
+                    style.innerHTML = ""; // Clear styles if no valid image
+                }
+            }
+
+            function resetGame() {
+                const closed = document.querySelector(".col-9");
+                if (closed) {
+                    closed.classList.add("col-9-closed");
+                    closed.classList.remove("col-9");
+                }
+                document.querySelector(".click").innerText = 0;
+                document.querySelector(".game-over").style.display = "none";
+            }
+
+            function handleColClick(col) {
+                const closed = document.querySelector(".col-9-closed");
+                if (!closed) return;
+
+                if (isSwapPossible(col, closed)) {
+                    swapCols(col, closed);
+                    updateScore();
+
+                    if (isSolved()) {
+                        endGame();
+                    }
+                }
+            }
+
+            function endGame() {
+                const closed = document.querySelector(".col-9-closed");
+                closed.classList.add("col-9");
+                closed.classList.remove("col-9-closed");
+
+                const lowestScore = Number(localStorage.lclick);
+                if (!lowestScore || lowestScore > score[0]) {
+                    localStorage.lclick = score[0];
+                }
+                score[1] = Number(localStorage.lclick);
+                document.querySelector(".lowest-click").innerText = score[1];
+                document.querySelector(".game-over").style.display = "flex";
+                document.querySelector(".current-click-over").innerText = score[0];
+            }
+        });
+
+    </script>
+</body>
+
+</html>

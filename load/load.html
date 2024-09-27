@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading</title>
+    <link rel="stylesheet" href="load.css">
+    <style>
+        body {
+            /* background-image: url("./assets/diamond-green.svg"); */
+            background-color: #161616;
+            background-image: linear-gradient(45deg, #4f341430, #30105830, #2c425530);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .llogo {
+            background-image: url(./../favicon.svg);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lback">
+        <div class="lbox">
+            <div class="licon0">
+            </div>
+            <div class="licon1">
+            </div>
+            <div class="llogo"></div>
+        </div>
+    </div>
+    <script>
+
+        function showLoading() {
+            const lback = document.createElement("div");
+            lback.classList.add("lback");
+            const lbox = document.createElement("div");
+            lback.classList.add("lbox");
+            const licon0 = document.createElement("div");
+            lback.classList.add("licon0");
+            const licon1 = document.createElement("div");
+            lback.classList.add("licon1");
+            const llogo = document.createElement("div");
+            lback.classList.add("llogo");
+            lbox.appendChild(licon0);
+            lbox.appendChild(licon1);
+            lbox.appendChild(llogo);
+            lback.appendChild(lback);
+        }
+
+    </script>
+</body>
+
+</html>

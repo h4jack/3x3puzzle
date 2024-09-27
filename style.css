@@ -1,0 +1,378 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #161616;
+    padding: 0px;
+    margin: 0px;
+    background-image: linear-gradient(45deg, #4f341430, #30105830, #2c425530);
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type="text"] {
+    height: 30px;
+    width: calc(100% - 10px);
+    background-color: #ffffff30;
+    color: white;
+    outline: none;
+    border-radius: 5px;
+    border: 0px;
+    padding: 5px;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    gap: 1px;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1px;
+}
+
+.col {
+    height: 100px;
+    width: 100px;
+    background-color: #ffffff10;
+    border-radius: 5px;
+    background-image: url("./assets/plane-in-jungle.jpg");
+    background-size: 300px;
+    /* Adjust based on the image size */
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.col p {
+    text-shadow: 0px 0px 10px gray;
+    color: white;
+    font-size: 20px;
+    filter: drop-shadow(0px 0px 1px black);
+    height: 20px;
+    text-align: center;
+    border-radius: 5px;
+    width: 20px;
+    padding: 5px;
+    margin: 0px;
+}
+
+.col-1 {
+    background-position: left top;
+}
+
+.col-2 {
+    background-position: center top;
+}
+
+.col-3 {
+    background-position: right top;
+}
+
+.col-4 {
+    background-position: left center;
+}
+
+.col-5 {
+    background-position: center;
+}
+
+.col-6 {
+    background-position: right center;
+}
+
+.col-7 {
+    background-position: left bottom;
+}
+
+.col-8 {
+    background-position: center bottom;
+}
+
+.col-9-closed {
+    background-image: none;
+    background-color: #ffffff10;
+}
+
+.col-9 {
+    background-position: right bottom;
+}
+
+
+
+.col:hover {
+    box-shadow: 0px 0px 10px gray;
+}
+
+.game-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (max-width: 650px) {
+    .game-body {
+        flex-direction: column-reverse;
+    }
+
+    .game-stat {
+        flex-direction: column-reverse;
+    }
+}
+
+.game-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+}
+
+.custom-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.game-score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+h3,
+h2 {
+    text-align: center;
+}
+
+div.custom-image p {
+    font-size: 13px;
+}
+
+.startNew {
+    height: auto;
+    width: 100px;
+    padding: 10px 20px;
+    background-color: #022c0530;
+    border: 1px solid white;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
+}
+
+.startNew:hover {
+    filter: drop-shadow(0px 0px 2px white);
+}
+
+/* MenuBar CSS */
+.menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    gap: 5px;
+    margin-left: 20px;
+    color: white;
+}
+
+.player-image {
+    background-image: url('./favicon.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 50px;
+    width: 50px;
+    border-radius: 5px;
+}
+
+.player-name-box {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.balance-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+}
+
+.player-balance {
+    font-size: 20px;
+    color: rgb(15, 187, 16);
+}
+
+.menubtn {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    height: 50px;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: filter 0.5s;
+}
+
+.menubtn:hover {
+    filter: drop-shadow(0px 0px 10px white);
+}
+
+.menubar {
+    width: 60%;
+    height: 3px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* footer start from there */
+
+.footer {
+    bottom: 0px;
+    padding: 10px 0px;
+}
+
+.footer a {
+    color: aqua;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+
+.add-balance {
+    border: 1px solid white;
+    border-radius: 5px;
+    width: 15px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* background-color: #ffffff50; */
+    padding: 2px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.add-balance:hover {
+    filter: drop-shadow(0px 0px 5px white);
+}
+
+.line {
+    height: 3px;
+    width: 15px;
+    border-radius: 5px;
+    background-color: white;
+    position: absolute;
+}
+
+.vline {
+    rotate: 90deg;
+}
+
+.file-upload-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-upload {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #007bff;
+    /* Customize background */
+    color: white;
+    /* Customize text color */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.file-upload input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    /* Hide the default input */
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+.game-over {
+    position: absolute;
+    z-index: 10;
+    background-color: #00000060;
+    backdrop-filter: blur(5px);
+    height: 310px;
+    width: 310px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+}
+
+.game-over h3 {
+    padding: 0px;
+    margin: 0px;
+}
